@@ -1,11 +1,13 @@
 const { UserModel } = require("../models/user.model");
-// const bcrypt = require("bcrypt");
+
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userRegistration = async (req, res) => {
 	try {
 		// console.log(req);
 		const { email, name, pass, age } = req.body;
-		const newUser = UserModel({ email, name, pass, age });
+		const hashedPass = bcrypt.hashSync(pass,5)
+		const newUser = UserModel({ email, name, pass:hashedPass, age });
 		await newUser.save();
 		res.status(200).send({ msg: "Registration Successful" });
 	} catch (error) {
@@ -22,10 +24,10 @@ const userLogin = async (req, res) => {
 		// console.log(req.body);
 		const user = await UserModel.findOne({ email });
 
+		
 		if (user) {
-			// console.log(user);
-			// console.log(user);
-			if (user.email == email && user.pass == pass) {
+			const isEqual = bcrypt.compareSync(pass,user.pass)
+			if (isEqual) {
 				res.status(200).send({
 					msg: "Login Successful",
 					status: true,
