@@ -5,8 +5,8 @@ const ProductRouter = require("express").Router();
 
 ProductRouter.post("/add",verify, async (req, res) => {
 	try {
-		const { image, name, brand, description, price } = req.body;
-		const newProduct = new productModel(req.body);
+		const { image, title, category, description, price } = req.body;
+		const newProduct = new productModel({ image, title, category, description, price});
 		await newProduct.save();
 		res.status(200).send({ msg: "Post is added" });
 	} catch (error) {
