@@ -9,6 +9,6 @@ userRoute.get("/", verify, userDetails);
 
 userRoute.post("/register", userRegistration);
 
-userRoute.post("/login",verify, userLogin);
+userRoute.post("/login", userLogin);
 
 module.exports = { userRoute };
