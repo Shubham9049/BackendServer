@@ -4,6 +4,11 @@ const userSchema = mongoose.Schema({
 	name: String,
 	pass: String,
 	age: Number,
+	role: {
+		type : String,
+		enum : ["admin","user", "superAdmin"],
+		default : "user",
+	}
 });
 
 const UserModel = mongoose.model("user", userSchema);

@@ -5,6 +5,7 @@ const { userRoute } = require("./routes/user.routes");
 const cors = require("cors");
 const { verify } = require("./middleware/jwtAuth.middleware");
 const { ProductRouter } = require("./routes/products.routes");
+const { RBAC } = require("./middleware/RBAC");
 
 require("dotenv").config();
 const PORT = process.env.PORT;
@@ -12,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/users", userRoute);
-app.use("/products", ProductRouter);
+app.use("/products",verify,RBAC, ProductRouter);
 
 app.listen(PORT, async () => {
 	try {

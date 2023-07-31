@@ -1,9 +1,10 @@
+const { forAdmin, forSuperAdmin } = require("../middleware/RBAC");
 const { verify } = require("../middleware/jwtAuth.middleware");
 const { productModel } = require("../models/email.model");
 
 const ProductRouter = require("express").Router();
 
-ProductRouter.post("/add",verify, async (req, res) => {
+ProductRouter.post("/add", async (req, res) => {
 	try {
 		const { image, title, category, description, price } = req.body;
 		const newProduct = new productModel({ image, title, category, description, price});
@@ -41,7 +42,7 @@ ProductRouter.get("/", async (req, res) => {
 	}
 });
 
-ProductRouter.patch("/update/:id",verify, async (req, res) => {
+ProductRouter.patch("/update/:id", async (req, res) => {
 	let id = req.params.id;
 	// console.log(req.body, id);
 	try {
@@ -54,7 +55,7 @@ ProductRouter.patch("/update/:id",verify, async (req, res) => {
 });
 
 //deleting the products
-ProductRouter.delete("/delete/:id",verify, async (req, res) => {
+ProductRouter.delete("/delete/:id", async (req, res) => {
 	let id = req.params.id;
 	try {
 		await productModel.findByIdAndDelete(id);

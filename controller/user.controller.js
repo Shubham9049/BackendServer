@@ -31,7 +31,7 @@ const userLogin = async (req, res) => {
 				res.status(200).send({
 					msg: "Login Successful",
 					status: true,
-					token: jwt.sign({ id: user._id }, "mySecretCode"),
+					token: jwt.sign({ id: user._id, name: user.name, role:user.role }, "mySecretCode"),
 				});
 			} else {
 				res.status(400).send({ 

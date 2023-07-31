@@ -6,8 +6,9 @@ const verify = async (req, res, next) => {
 		const tkn = req.header("Auth");
 		const decoded = jwt.verify(tkn, "mySecretCode");
 		if (decoded) {
+			console.log(decoded);
+			req.user = {...decoded}
 			req.body.userId = decoded.id;
-			// console.log(req.body.userId);
 			next();
 		} else {
 			res.status(400).send({ msg: "Something Went Wrong" });
