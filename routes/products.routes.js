@@ -16,7 +16,7 @@ ProductRouter.post("/add",verify,RBAC, async (req, res) => {
 	}
 });
 
-ProductRouter.get("/", async (req, res) => {
+ProductRouter.get("/", verify,RBAC,async (req, res) => {
 	try {
 		// console.log(req.query);
 		let search = req.query.search || "";
