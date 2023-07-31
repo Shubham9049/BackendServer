@@ -1,6 +1,7 @@
 const { forAdmin, forSuperAdmin } = require("../middleware/RBAC");
 const { verify } = require("../middleware/jwtAuth.middleware");
 const { productModel } = require("../models/email.model");
+const {RBAC} = require("../middleware/RBAC")
 
 const ProductRouter = require("express").Router();
 
