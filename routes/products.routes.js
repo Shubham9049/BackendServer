@@ -34,7 +34,7 @@ ProductRouter.get("/", verify,RBAC,async (req, res) => {
 			// If the search term is empty, remove the $text operator
 			delete searchQuery.$text;
 		}
-		const getProduct = await productModel.find(searchQuery);
+		const getProduct = await productModel.find(id,searchQuery);
 
 		// console.log(getProduct);
 		res.status(200).send(getProduct);
