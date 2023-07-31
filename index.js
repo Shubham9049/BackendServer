@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/users", userRoute);
-app.use("/products",verify,RBAC, ProductRouter);
+app.use("/products", ProductRouter);
 
 app.listen(PORT, async () => {
 	try {
